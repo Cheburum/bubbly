@@ -13,6 +13,8 @@
 #include "CleanManager.h"
 #include "CollisionManager.h"
 
+class Scene;
+
 class GlobalInfo {
 private:
     sf::Clock clock;
@@ -21,8 +23,9 @@ private:
     sf::RenderWindow window;
     CollisionManager collisionDetector;
     sf::Font font;
+    Scene& scene;
 public:
-    GlobalInfo();
+    GlobalInfo(Scene&);
     void onFrameDone();
     int getDeltaTime() const;
     float getPixelsPerMeter() const;
@@ -30,6 +33,7 @@ public:
     sf::RenderWindow& getWindow();
     CollisionManager& getCollisionDetector();
     const sf::Font& getFont();
+    Scene& getScene();
     static const int screenW = 1280; //width
     static const int screenH = 720; //height
 };

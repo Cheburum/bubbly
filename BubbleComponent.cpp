@@ -5,9 +5,11 @@
 #include "BubbleComponent.h"
 #include "helpFunctions.h"
 
-BubbleComponent::BubbleComponent(GameObject &obj):
+BubbleComponent::BubbleComponent(GameObject &obj,CounterComponent& counter):
         Component(obj),
-        physComponent((PhysComponent*)obj.getComponent("Physics")) {
+        physComponent((PhysComponent*)obj.getComponent("Physics")),
+        counter(counter){
+    ++counter;
     clock.restart();
 }
 
@@ -17,6 +19,8 @@ void BubbleComponent::update() {
         clock.restart();
     }
     for(auto& el: physComponent->getCollisions())
-        if(!el->getGameObject().containsComponent("Bubble"))
+        if(el->getGameObject().containsComponent("Bullet")) {
+            --counter;
             gameObject.destroy();
+        }
 }

@@ -8,13 +8,15 @@
 
 #include "Component.h"
 #include "PhysComponent.h"
+#include "CounterComponent.h"
 
 class BubbleComponent : public Component {
 private:
     PhysComponent* physComponent;
+    CounterComponent& counter;
     sf::Clock clock;
 public:
-    BubbleComponent(GameObject&);
+    BubbleComponent(GameObject&,CounterComponent& counter);
     void update();
 };
 

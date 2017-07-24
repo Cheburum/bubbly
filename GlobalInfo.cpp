@@ -4,17 +4,21 @@
 
 #include "GlobalInfo.h"
 
-GlobalInfo::GlobalInfo()
+GlobalInfo::GlobalInfo(Scene& scene1)
         : gravity(0.0, 9.81f),
           pixelsPerMeter(40.0f),
           window(sf::VideoMode(screenW, screenH),
-                 "Bubble game", sf::Style::Close) {
+                 "Bubble game", sf::Style::Close),
+          scene(scene1){
     if(!font.loadFromFile("../fonts/Boxy-Bold.ttf")){
         //TODO
     }
     window.setFramerateLimit(60);
     window.setVerticalSyncEnabled(true);
     clock.restart();
+}
+Scene& GlobalInfo::getScene() {
+    return scene;
 }
 
 sf::RenderWindow& GlobalInfo::getWindow(){

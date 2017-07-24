@@ -3,6 +3,9 @@
 //
 
 #include <SFML/Window/Event.hpp>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 #include "Scene.h"
 #include "TimerComponent.h"
 #include "GunComponent.h"
@@ -10,7 +13,31 @@
 #include "PhysComponent.h"
 #include "BubbleComponent.h"
 
-Scene::Scene():cleaner(gameObjects) {
+Scene::Scene():cleaner(gameObjects),needReload(true),info(*this) {}
+
+GameConfig Scene::loadConfig() {
+    GameConfig cfg={1,1,1};
+    std::ifstream file("../gameConfig/input.txt");
+    for(std::string line;std::getline(file,line);){
+        std::istringstream stream(line);
+        std::string key,value;
+        bool ok=std::getline(stream,key,'=')&&std::getline(stream,value);
+        std::cout<<key<<'='<<value<<std::endl;
+        if(ok){
+            if(key.compare("CountTarget")==0)
+                cfg.countTarget=std::stoul(value);
+            else if(key.compare("Speed")==0)
+                cfg.speed=std::stoul(value);
+            else if(key.compare("Time")==0)
+                cfg.time=std::stoul(value);
+        }
+
+    }
+    return cfg;
+}
+
+void Scene::loadLevel() {
+    const auto cfg = loadConfig();
     //Loading textures
     //background
     if (!backgroundTexture.loadFromFile("../images/bg.png")) {
@@ -27,9 +54,13 @@ Scene::Scene():cleaner(gameObjects) {
     bubbleTexture.setSmooth(true);
     const auto scale = info.screenW / 25.0f;
     //adding gameobjects
-    for (auto j = 0; j < 6; ++j)
-        for (auto i = 0; i < 12; ++i)
-            addBubble(sf::Vector2f(scale + 2 * scale * i, scale + 2 * j * scale));
+    //bubble counter
+    gameObjects.push_front(GameObject(info));
+    auto bubbleCounter = new CounterComponent(gameObjects.front());
+    gameObjects.front().addComponent("BubbleCounter",bubbleCounter);
+    for (auto j = 0,k=0; j < 6&&k<cfg.countTarget; ++j)
+        for (auto i = 0; i < 12&&k<cfg.countTarget; ++i,++k)
+            addBubble(sf::Vector2f(scale + 2 * scale * i, scale + 2 * j * scale),*bubbleCounter);
     //Bottom border
     addWall(sf::Vector2f(info.screenW, 30.0f), sf::Vector2f(info.screenW / 2, info.screenH + 15.0f));
     //top border
@@ -48,9 +79,8 @@ Scene::Scene():cleaner(gameObjects) {
     gunTexture.setSmooth(true);
     //add timer
     gameObjects.push_front(GameObject(info));
-    gameObjects.front().addComponent("Timer", new TimerComponent(gameObjects.front(),
-                                                                 sf::Vector2f(info.screenW - 24 * 10, 24.0f),
-                                                                 sf::Vector2f(1, 1), 13));
+    gameObjects.front().getTransform().position=sf::Vector2f(info.screenW - 24 * 10, 24.0f);
+    gameObjects.front().addComponent("Timer", new TimerComponent(gameObjects.front(),*bubbleCounter,cfg.time));
     //add boy
     gameObjects.push_front(GameObject(info));
     gameObjects.front().addComponent("Sprite", new SpriteComponent(gameObjects.front(), gunTexture));
@@ -60,7 +90,7 @@ Scene::Scene():cleaner(gameObjects) {
                                                gameObjects,
                                                info.screenH - info.screenH / 22.0f,
                                                bulletTexture);
-    gunComponent->setForce(30);
+    gunComponent->setForce(cfg.speed);
     gameObjects.front().addComponent("Gun",gunComponent);
 }
 
@@ -73,7 +103,7 @@ void Scene::addWall(const sf::Vector2f &size, const sf::Vector2f &position) {
     gameObjects.front().getTransform().position = position;
 }
 
-void Scene::addBubble(const sf::Vector2f &position) {
+void Scene::addBubble(const sf::Vector2f &position,CounterComponent& counter) {
     gameObjects.push_front(GameObject(info));
     gameObjects.front().addComponent("Sprite",
                                      new SpriteComponent(gameObjects.front(), bubbleTexture));
@@ -84,7 +114,7 @@ void Scene::addBubble(const sf::Vector2f &position) {
     currentPhysComponent->setCollider(Collider::circleCollider(bubbleTexture.getSize().x * scale / 2));
     gameObjects.front().getTransform().scale = sf::Vector2f(scale, scale);
     gameObjects.front().getTransform().position += position;
-    gameObjects.front().addComponent("Bubble", new BubbleComponent(gameObjects.front()));
+    gameObjects.front().addComponent("Bubble", new BubbleComponent(gameObjects.front(),counter));
 }
 
 void Scene::update() {
@@ -98,12 +128,21 @@ void Scene::draw() {
         el.draw();
 }
 
+void Scene::reload() {
+    needReload=true;
+}
+
 void Scene::startGameLoop() {
     while (info.getWindow().isOpen()) {
         sf::Event event;
         while (info.getWindow().pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 info.getWindow().close();
+        }
+        if(needReload){
+            gameObjects.clear();
+            loadLevel();
+            needReload=false;
         }
         info.getWindow().clear(sf::Color::Blue);
         info.getWindow().draw(background);

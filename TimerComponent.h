@@ -9,14 +9,17 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Component.h"
+#include "CounterComponent.h"
 
 class TimerComponent : public Component {
 private:
     sf::Text text;
     sf::Clock clock;
     const float time;
+    bool timeExceeded;
+    CounterComponent& bubbleCounter;
 public:
-    TimerComponent(GameObject&,sf::Vector2f place,sf::Vector2f size,float time);
+    TimerComponent(GameObject&,CounterComponent&,float time);
     void draw();
 };
 

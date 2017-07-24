@@ -12,6 +12,13 @@
 #include "GameObject.h"
 #include "CollisionManager.h"
 #include "CleanManager.h"
+#include "CounterComponent.h"
+
+struct GameConfig{
+    unsigned int countTarget;
+    unsigned int speed;
+    unsigned int time;
+};
 
 class Scene {
 private:
@@ -25,10 +32,14 @@ private:
     sf::Texture backgroundTexture;
     sf::Texture gunTexture;
     sf::Texture bulletTexture;
-    void addBubble(const sf::Vector2f& arg);
+    void addBubble(const sf::Vector2f& arg,CounterComponent&);
     void addWall(const sf::Vector2f& size, const sf::Vector2f& position);
+    bool needReload;
+    void loadLevel();
+    GameConfig loadConfig();
 public:
     Scene();
+    void reload();
     void startGameLoop();
 };
 
