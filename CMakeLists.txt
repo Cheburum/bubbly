@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.7)
+project(ShootingGallery)
+
+set(CMAKE_CXX_STANDARD 17)
+
+set(SOURCE_FILES main.cpp Scene.cpp Scene.h GameObject.cpp GameObject.h PhysComponent.cpp PhysComponent.h Transform.cpp Transform.h Component.cpp Component.h SpriteComponent.cpp SpriteComponent.h GlobalInfo.cpp GlobalInfo.h Collider.cpp Collider.h CollisionManager.cpp CollisionManager.h TimerComponent.cpp TimerComponent.h GunComponent.cpp GunComponent.h AbstractManager.cpp AbstractManager.h CleanManager.cpp CleanManager.h BulletComponent.cpp BulletComponent.h BubbleComponent.cpp BubbleComponent.h helpFunctions.h)
+add_executable(ShootingGallery ${SOURCE_FILES})
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/")
+find_package(SFML COMPONENTS system window graphics REQUIRED)
+if(NOT SFML_FOUND)
+    message(SEND_ERROR "SFML not found")
+    return()
+else()
+    target_link_libraries(ShootingGallery ${SFML_LIBRARIES})
+endif()
