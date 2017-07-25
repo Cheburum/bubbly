@@ -41,6 +41,7 @@ public:
     Scene();
     void reload();
     void startGameLoop();
+    GameObject& createGameObject();
 };
 
 

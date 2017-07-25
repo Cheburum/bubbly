@@ -34,8 +34,8 @@ public:
     CollisionManager& getCollisionDetector();
     const sf::Font& getFont();
     Scene& getScene();
-    static const int screenW = 1280; //width
-    static const int screenH = 720; //height
+    static constexpr int screenW = 1280; //width
+    static constexpr int screenH = 720; //height
 };
 
 

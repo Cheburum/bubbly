@@ -15,14 +15,13 @@
 
 class GunComponent : public Component {
 private:
-    std::forward_list<GameObject>& gameObjects;
     const sf::Texture& bulletTexture;
     sf::Clock clock;
     float force;
     sf::Text text;
     float coolDown;
 public:
-    GunComponent(GameObject& object, std::forward_list<GameObject>&,float ypos,
+    GunComponent(GameObject& object,float ypos,
                  const sf::Texture& texture);
     void update();
     void draw();

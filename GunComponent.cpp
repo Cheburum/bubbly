@@ -8,11 +8,11 @@
 #include "PhysComponent.h"
 #include "GlobalInfo.h"
 #include "BulletComponent.h"
+#include "Scene.h"
 
-GunComponent::GunComponent(GameObject& object,std::forward_list<GameObject>& container,float ypos,
+GunComponent::GunComponent(GameObject& object,float ypos,
 const sf::Texture& bulletTexture1)
         :Component(object),
-         gameObjects(container),
          bulletTexture(bulletTexture1),
         coolDown(1.0f){
     gameObject.getTransform().position.y=ypos;
@@ -38,14 +38,14 @@ void GunComponent::update() {
     if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)&&clock.getElapsedTime().asSeconds()>coolDown){
         clock.restart();
         const auto scale = gameObject.getWorldInfo().screenW/bulletTexture.getSize().x/40.0f;
-        gameObjects.push_front(GameObject(gameObject.getWorldInfo()));
-        gameObjects.front().getTransform().scale*=scale;
-        gameObjects.front().getTransform().position=gameObject.getTransform().position;
-        const auto physComp = new PhysComponent(gameObjects.front(), 1.0f, true,true);
-        gameObjects.front().addComponent("Physics",physComp);
+        auto& newBullet=gameObject.getWorldInfo().getScene().createGameObject();
+        newBullet.getTransform().scale*=scale;
+        newBullet.getTransform().position=gameObject.getTransform().position;
+        const auto physComp = new PhysComponent(newBullet, 1.0f, true,true);
+        newBullet.addComponent("Physics",physComp);
         physComp->setCollider(Collider::circleCollider(bulletTexture.getSize().x*scale/2));
         physComp->addImpulse(sf::Vector2f(0.0f,-1.0f*force));
-        gameObjects.front().addComponent("Sprite",new SpriteComponent(gameObjects.front(), bulletTexture));
-        gameObjects.front().addComponent("Bullet",new BulletComponent(gameObjects.front()));
+        newBullet.addComponent("Sprite",new SpriteComponent(newBullet, bulletTexture));
+        newBullet.addComponent("Bullet",new BulletComponent(newBullet));
     }
 }

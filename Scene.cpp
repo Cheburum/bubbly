@@ -55,9 +55,10 @@ void Scene::loadLevel() {
     const auto scale = info.screenW / 25.0f;
     //adding gameobjects
     //bubble counter
-    gameObjects.push_front(GameObject(info));
-    auto bubbleCounter = new CounterComponent(gameObjects.front());
-    gameObjects.front().addComponent("BubbleCounter",bubbleCounter);
+    auto& bubbleObject = createGameObject();
+    auto bubbleCounter = new CounterComponent(bubbleObject);
+    bubbleObject.addComponent("BubbleCounter",bubbleCounter);
+
     for (auto j = 0,k=0; j < 6&&k<cfg.countTarget; ++j)
         for (auto i = 0; i < 12&&k<cfg.countTarget; ++i,++k)
             addBubble(sf::Vector2f(scale + 2 * scale * i, scale + 2 * j * scale),*bubbleCounter);
@@ -78,43 +79,42 @@ void Scene::loadLevel() {
     }
     gunTexture.setSmooth(true);
     //add timer
-    gameObjects.push_front(GameObject(info));
-    gameObjects.front().getTransform().position=sf::Vector2f(info.screenW - 24 * 10, 24.0f);
-    gameObjects.front().addComponent("Timer", new TimerComponent(gameObjects.front(),*bubbleCounter,cfg.time));
+    auto& timerObject = createGameObject();
+    timerObject.getTransform().position=sf::Vector2f(info.screenW - 24 * 10, 24.0f);
+    timerObject.addComponent("Timer", new TimerComponent(timerObject,*bubbleCounter,cfg.time));
     //add boy
-    gameObjects.push_front(GameObject(info));
-    gameObjects.front().addComponent("Sprite", new SpriteComponent(gameObjects.front(), gunTexture));
+    auto& boyObject = createGameObject();
+    boyObject.addComponent("Sprite", new SpriteComponent(boyObject, gunTexture));
     const auto gunScale = info.screenW / gunTexture.getSize().x / 10.0f;
-    gameObjects.front().getTransform().scale = sf::Vector2f(gunScale, gunScale);
-    const auto gunComponent = new GunComponent(gameObjects.front(),
-                                               gameObjects,
+    boyObject.getTransform().scale = sf::Vector2f(gunScale, gunScale);
+    const auto gunComponent = new GunComponent(boyObject,
                                                info.screenH - info.screenH / 22.0f,
                                                bulletTexture);
     gunComponent->setForce(cfg.speed);
-    gameObjects.front().addComponent("Gun",gunComponent);
+    boyObject.addComponent("Gun",gunComponent);
 }
 
 void Scene::addWall(const sf::Vector2f &size, const sf::Vector2f &position) {
-    gameObjects.push_front(GameObject(info));
-    gameObjects.front().addComponent("Physics",
-                                     new PhysComponent(gameObjects.front(), 0.0f, false, false));
-    const auto currentPhysComponent = (PhysComponent *) gameObjects.front().getComponent("Physics");
+    auto& newGameObject = createGameObject();
+    newGameObject.addComponent("Physics",
+                                     new PhysComponent(newGameObject, 0.0f, false, false));
+    const auto currentPhysComponent = (PhysComponent *) newGameObject.getComponent("Physics");
     currentPhysComponent->setCollider(Collider::rectangleCollider(size));
-    gameObjects.front().getTransform().position = position;
+    newGameObject.getTransform().position = position;
 }
 
 void Scene::addBubble(const sf::Vector2f &position,CounterComponent& counter) {
-    gameObjects.push_front(GameObject(info));
-    gameObjects.front().addComponent("Sprite",
-                                     new SpriteComponent(gameObjects.front(), bubbleTexture));
-    gameObjects.front().addComponent("Physics",
-                                     new PhysComponent(gameObjects.front(), 1.0f, false, true));
-    const auto currentPhysComponent = (PhysComponent *) gameObjects.front().getComponent("Physics");
+    auto& newGameObject = createGameObject();
+    newGameObject.addComponent("Sprite",
+                                     new SpriteComponent(newGameObject, bubbleTexture));
+    newGameObject.addComponent("Physics",
+                                     new PhysComponent(newGameObject, 1.0f, false, true));
+    const auto currentPhysComponent = (PhysComponent *) newGameObject.getComponent("Physics");
     const auto scale = info.screenW / bubbleTexture.getSize().x / 20.0f;
     currentPhysComponent->setCollider(Collider::circleCollider(bubbleTexture.getSize().x * scale / 2));
-    gameObjects.front().getTransform().scale = sf::Vector2f(scale, scale);
-    gameObjects.front().getTransform().position += position;
-    gameObjects.front().addComponent("Bubble", new BubbleComponent(gameObjects.front(),counter));
+    newGameObject.getTransform().scale = sf::Vector2f(scale, scale);
+    newGameObject.getTransform().position += position;
+    newGameObject.addComponent("Bubble", new BubbleComponent(newGameObject,counter));
 }
 
 void Scene::update() {
@@ -130,6 +130,11 @@ void Scene::draw() {
 
 void Scene::reload() {
     needReload=true;
+}
+
+GameObject& Scene::createGameObject() {
+    gameObjects.push_front(GameObject(info));
+    return gameObjects.front();
 }
 
 void Scene::startGameLoop() {

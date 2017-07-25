@@ -1,4 +1,5 @@
 #include "Scene.h"
+
 int main() {
     srand(time(NULL));
     Scene field;
