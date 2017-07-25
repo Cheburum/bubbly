@@ -11,11 +11,13 @@
 class CounterComponent : public Component{
 private:
     unsigned int count;
+    unsigned int maxCount;
 public:
     CounterComponent(GameObject&);
     void operator++();
     void operator--();
     unsigned int getCount()const;
+    unsigned int getMaxCount()const;
 };
 
 

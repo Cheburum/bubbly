@@ -16,7 +16,7 @@ TimerComponent::TimerComponent(GameObject& obj, CounterComponent& counter,const 
  timeExceeded(false),
  bubbleCounter(counter){
     text.setFont(gameObject.getWorldInfo().getFont());
-    text.setCharacterSize(55);
+    text.setCharacterSize(50);
     text.setFillColor(sf::Color::Blue);
     text.setPosition(gameObject.getTransform().position);
     text.setScale(gameObject.getTransform().scale);
@@ -26,14 +26,18 @@ TimerComponent::TimerComponent(GameObject& obj, CounterComponent& counter,const 
 void TimerComponent::draw() {
     if(!timeExceeded) {
         auto t = time - clock.getElapsedTime().asSeconds();
+        const auto numberOfBubbles=bubbleCounter.getMaxCount();
+        const auto shotDown=numberOfBubbles-bubbleCounter.getCount();
         if (t < 0.0f) {
             t = 0.0f;
             timeExceeded=true;
-            text.setString("You loose...\nPress space to restart Level");
+            const auto score = std::to_string(shotDown)+"/"+std::to_string(numberOfBubbles);
+            text.setString(score+"\nYou loose...\nPress space to restart Level");
             text.setPosition(20.0f,20.0f);
         }else if(bubbleCounter.getCount()==0){
+            const auto score = std::to_string(shotDown)+"/"+std::to_string(numberOfBubbles);
             timeExceeded=true;
-            text.setString("You won!!!\nPress space to restart Level");
+            text.setString(score+"\nYou won!!!\nPress space to restart Level");
             text.setPosition(20.0f,20.0f);
         }
         else
