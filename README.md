@@ -1,22 +1,30 @@
 ## Sinopsis
 It is a simple 2d game demo with physics written in C++ using Unity3d-like gameobject/component system. I've tryed to make it easy to extend and to upgrade.
 ## Code example
+
+1. Add new empty GameObject to game world.
 ```C++
-//Add new empty GameObject(GO) to game world
   auto& newGameObject = scene.createGameObject();
-//add Physics component to this object
-//Physics component requires GO reference and some physics info like "is it static or dynamic"
+```
+2. Add Physics component to this object. All components require GameObject reference. And physComponent needs some physics info: mass, static or dynamic, is affected by gravity or not.
+```C++
   newGameObject.addComponent("Physics", 
                           new PhysComponent(newGameObject, 0.0f, false, false));
-//We can get component from GO by name
+```
+3. We can get component from GO by name.
+```C++
   const auto currentPhysComponent = 
     (PhysComponent *) newGameObject.getComponent("Physics");
-//Setting collider of physComponent
+```
+4. Set the collider of physComponent.
+```C++
   currentPhysComponent
-    ->setCollider(Collider::rectangleCollider(sf::Vector2f(10.0f,30.0f));
-//setting GO position
+    ->setCollider(Collider::rectangleCollider(sf::Vector2f(1.0f,3.0f));
+```
+5. Set GameObject's position.
+```C++
   newGameObject.getTransform().position = 
-    sf::Vector2f(423.0f,44.0f);
+    sf::Vector2f(3.0f,4.0f);
 ```
 ## Installation
 You will need SFML library to compile it.

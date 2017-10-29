@@ -6,15 +6,15 @@
 
 Collider Collider::circleCollider(float radius) {
     Collider result;
-    result.type=CIRCLE;
-    result.properties=radius;
+    result.type = CIRCLE;
+    result.properties = radius;
     return result;
 }
 
 Collider Collider::rectangleCollider(sf::Vector2f size) {
     Collider result;
-    result.type=RECTANGLE;
-    result.properties=size;
+    result.type = RECTANGLE;
+    result.properties = size;
     return result;
 }
 

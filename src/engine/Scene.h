@@ -12,26 +12,36 @@
 #include "GameObject.h"
 #include "CollisionManager.h"
 #include "CleanManager.h"
+#include "CameraComponent.h"
 #include <functional>
 
 class Scene {
 private:
     GlobalInfo info;
+
     void update();
+
     void draw();
+
     std::forward_list<GameObject> gameObjects;
     CleanManager cleaner;
     bool needReload;
     sf::Sprite background;
     bool backgroundLoaded;
     std::function<void()> loadLevel;
+    CameraComponent* mainCamera;
 public:
     Scene(std::function<void()>);
-    void setBackground(sf::Texture&);
+
+    void setBackground(sf::Texture &);
+
     void reload();
+
     void startGameLoop();
-    GameObject& createGameObject();
-    const GlobalInfo& getInfo() const;
+
+    GameObject &createGameObject();
+
+    const GlobalInfo &getInfo() const;
 };
 
 

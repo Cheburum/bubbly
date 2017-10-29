@@ -15,11 +15,13 @@
 class CollisionManager;
 
 class PhysComponent;
-typedef std::vector<PhysComponent*> CollisionList;
+
+typedef std::vector<PhysComponent *> CollisionList;
 
 class PhysComponent : public Component {
 private:
     friend class CollisionManager;
+
     float mass;
     sf::Vector2f speed;
     sf::Vector2f acceleration;
@@ -27,18 +29,27 @@ private:
     Collider collider;
     bool affectGravity;
     bool isDynamic;
-    explicit PhysComponent(PhysComponent*);
+
+    explicit PhysComponent(PhysComponent *);
+
 public:
     //too many arguments, need to create more constructors?
-    PhysComponent(GameObject& gameObject1,
-                  const float mass,bool affectGravity,bool dynamic);
-    void setCollider(const Collider& col);
+    PhysComponent(GameObject &gameObject1,
+                  const float mass, bool affectGravity, bool dynamic);
+
+    void setCollider(const Collider &col);
+
     void update();
+
     void setMass(float);
-    void addForce(const sf::Vector2f&); //Permanent force
-    void addImpulse(const sf::Vector2f&);
+
+    void addForce(const sf::Vector2f &); //Permanent force
+    void addImpulse(const sf::Vector2f &);
+
     void setDynamic(bool);
-    const CollisionList& getCollisions();
+
+    const CollisionList &getCollisions();
+
     ~PhysComponent();
 };
 

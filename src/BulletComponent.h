@@ -14,10 +14,11 @@ class BulletComponent : public Component {
 private:
     sf::Clock clock;
     unsigned short collisionCounter;
-    SpriteComponent* sprite;
-    PhysComponent* physComponent;
+    SpriteComponent *sprite;
+    PhysComponent *physComponent;
 public:
-    BulletComponent(GameObject&);
+    BulletComponent(GameObject &);
+
     void update();
 };
 

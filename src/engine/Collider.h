@@ -9,7 +9,7 @@
 #include <SFML/System.hpp>
 #include <variant>
 
-enum ColliderType{
+enum ColliderType {
     CIRCLE,
     RECTANGLE
 };
@@ -18,12 +18,16 @@ enum ColliderType{
 class Collider {
 private:
     ColliderType type;
-    std::variant<float,sf::Vector2f> properties;
+    std::variant<float, sf::Vector2f> properties;
 public:
     ColliderType getType();
+
     float getRadius();
+
     sf::Vector2f getSize();
+
     static Collider circleCollider(float radius);
+
     static Collider rectangleCollider(sf::Vector2f size);
 };
 

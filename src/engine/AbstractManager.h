@@ -10,9 +10,11 @@
 
 class AbstractManager {
 public:
-    virtual void add(Component*);
+    virtual void add(Component *);
+
     virtual void update();
-    virtual void remove(Component*);
+
+    virtual void remove(Component *);
 };
 
 

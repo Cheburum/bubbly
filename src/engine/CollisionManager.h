@@ -9,15 +9,20 @@
 #include "AbstractManager.h"
 
 class PhysComponent;
+
 //This class detects collisions of physics objects
 class CollisionManager : public AbstractManager {
 private:
-    std::vector<PhysComponent*> objects;
-    static bool checkCollisions(PhysComponent*,PhysComponent*);
+    std::vector<PhysComponent *> objects;
+
+    static bool checkCollisions(PhysComponent *, PhysComponent *);
+
 public:
-    void add(Component* const);
+    void add(Component *const);
+
     void update();
-    void remove(Component* const);
+
+    void remove(Component *const);
 };
 
 

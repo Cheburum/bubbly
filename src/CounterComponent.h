@@ -8,16 +8,20 @@
 
 #include "engine/Component.h"
 
-class CounterComponent : public Component{
+class CounterComponent : public Component {
 private:
     unsigned int count;
     unsigned int maxCount;
 public:
-    CounterComponent(GameObject&);
+    CounterComponent(GameObject &);
+
     void operator++();
+
     void operator--();
-    unsigned int getCount()const;
-    unsigned int getMaxCount()const;
+
+    unsigned int getCount() const;
+
+    unsigned int getMaxCount() const;
 };
 
 

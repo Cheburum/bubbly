@@ -10,11 +10,12 @@
 #include "AbstractManager.h"
 #include "GameObject.h"
 
-class CleanManager{
+class CleanManager {
 private:
-    std::forward_list<GameObject>& gameObjects;
+    std::forward_list<GameObject> &gameObjects;
 public:
-    CleanManager(std::forward_list<GameObject>& arg);
+    CleanManager(std::forward_list<GameObject> &arg);
+
     void afterUpdate();
 };
 

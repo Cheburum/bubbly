@@ -5,14 +5,16 @@
 #include "Component.h"
 #include "GameObject.h"
 
-Component::Component(GameObject& obj):gameObject(obj)
-{
+Component::Component(GameObject &obj) : gameObject(obj) {
 
 }
 
 void Component::update() {}
-void Component::draw(){}
-GameObject& Component::getGameObject() {
+
+void Component::draw() {}
+
+GameObject &Component::getGameObject() {
     return gameObject;
 }
+
 Component::~Component() {}

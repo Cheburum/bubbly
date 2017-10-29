@@ -17,9 +17,10 @@ private:
     sf::Clock clock;
     const float time;
     bool timeExceeded;
-    CounterComponent& bubbleCounter;
+    CounterComponent &bubbleCounter;
 public:
-    TimerComponent(GameObject&,CounterComponent&,float time);
+    TimerComponent(GameObject &, CounterComponent &, float time);
+
     void draw();
 };
 

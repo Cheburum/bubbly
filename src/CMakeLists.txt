@@ -3,8 +3,8 @@ project(bubbly)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES BubbleComponent.cpp  BulletComponent.h CounterComponent.h BubbleComponent.h main.cpp
-BulletComponent.cpp  CounterComponent.cpp GunComponent.cpp GunComponent.h TimerComponent.cpp TimerComponent.h)
+set(SOURCE_FILES BubbleComponent.cpp BulletComponent.h CounterComponent.h BubbleComponent.h main.cpp
+        BulletComponent.cpp CounterComponent.cpp GunComponent.cpp GunComponent.h TimerComponent.cpp TimerComponent.h)
 
 add_executable(bubbly ${SOURCE_FILES})
 

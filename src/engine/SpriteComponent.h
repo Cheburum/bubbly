@@ -10,15 +10,23 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Component.h"
 
-class SpriteComponent: public Component{
+class SpriteComponent : public Component {
 private:
     sf::Sprite sprite;
+    //float pixelsPerUnit;
+    sf::Vector2f textureSize;
+    sf::Vector2f getScaleToUnits(sf::Vector2f units) const;
 public:
-    SpriteComponent(GameObject& gameObject1);
-    SpriteComponent(GameObject& transform,const sf::Texture& texture);
-    sf::Sprite& getSprite();
-    void setTexture(const sf::Texture& texture);
+    SpriteComponent(GameObject &gameObject1);
+
+    SpriteComponent(GameObject &transform, const sf::Texture &texture);
+
+    sf::Sprite &getSprite();
+
+    void setTexture(const sf::Texture &texture);
+
     void update();
+
     void draw();
 };
 

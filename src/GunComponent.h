@@ -15,16 +15,19 @@
 
 class GunComponent : public Component {
 private:
-    const sf::Texture& bulletTexture;
+    const sf::Texture &bulletTexture;
     sf::Clock clock;
     float force;
     sf::Text text;
     float coolDown;
 public:
-    GunComponent(GameObject& object,float ypos,
-                 const sf::Texture& texture);
+    GunComponent(GameObject &object, float ypos,
+                 const sf::Texture &texture);
+
     void update();
+
     void draw();
+
     void setForce(float);
 };
 

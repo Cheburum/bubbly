@@ -18,24 +18,35 @@ class Scene;
 class GlobalInfo {
 private:
     sf::Clock clock;
-    float pixelsPerMeter;
+    float pixelsPerUnit;
     sf::Vector2f gravity;
     sf::RenderWindow window;
     CollisionManager collisionDetector;
     sf::Font font;
-    Scene& scene;
+    Scene &scene;
 public:
-    GlobalInfo(Scene&);
+    GlobalInfo(Scene &);
+
     void onFrameDone();
+
     int getDeltaTime() const;
-    float getPixelsPerMeter() const;
-    const sf::Vector2f& getGravity() const;
-    sf::RenderWindow& getWindow();
-    CollisionManager& getCollisionDetector();
-    const sf::Font& getFont();
-    Scene& getScene();
-    static constexpr int screenW = 1280; //width
-    static constexpr int screenH = 720; //height
+
+    float getPixelsPerUnit() const;
+
+    const sf::Vector2f &getGravity() const;
+
+    sf::RenderWindow &getWindow();
+
+    CollisionManager &getCollisionDetector();
+
+    const sf::Font &getFont();
+
+    Scene &getScene();
+
+    static constexpr int screenW = (1280); //width
+    static constexpr int screenH = (720); //height
+    static constexpr float screenWidthInUnits = 20;
+    static constexpr float screenHeightInUnits = screenH / (screenW / screenWidthInUnits);
 };
 
 

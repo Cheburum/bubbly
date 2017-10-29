@@ -11,11 +11,12 @@
 
 class BubbleComponent : public Component {
 private:
-    PhysComponent* physComponent;
-    CounterComponent& counter;
+    PhysComponent *physComponent;
+    CounterComponent &counter;
     sf::Clock clock;
 public:
-    BubbleComponent(GameObject&,CounterComponent& counter);
+    BubbleComponent(GameObject &, CounterComponent &counter);
+
     void update();
 };
 

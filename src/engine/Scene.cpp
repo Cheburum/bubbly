@@ -7,13 +7,13 @@
 #include <sstream>
 #include <iostream>
 #include "Scene.h"
-#include "SpriteComponent.h"
 #include "PhysComponent.h"
 
-Scene::Scene(std::function<void()> fun):cleaner(gameObjects),
-                                        needReload(true),
-                                        info(*this),
-                                        loadLevel(fun){}
+Scene::Scene(std::function<void()> fun) : cleaner(gameObjects),
+                                          needReload(true),
+                                          info(*this),
+                                          loadLevel(fun),
+                                          mainCamera(nullptr){}
 
 void Scene::update() {
     info.getCollisionDetector().update();
@@ -27,10 +27,10 @@ void Scene::draw() {
 }
 
 void Scene::reload() {
-    needReload=true;
+    needReload = true;
 }
 
-GameObject& Scene::createGameObject() {
+GameObject &Scene::createGameObject() {
     gameObjects.push_front(GameObject(info));
     return gameObjects.front();
 }
@@ -42,13 +42,13 @@ void Scene::startGameLoop() {
             if (event.type == sf::Event::Closed)
                 info.getWindow().close();
         }
-        if(needReload){
+        if (needReload) {
             gameObjects.clear();
             loadLevel();
-            needReload=false;
+            needReload = false;
         }
         info.getWindow().clear(sf::Color::Blue);
-        if(backgroundLoaded)
+        if (backgroundLoaded)
             info.getWindow().draw(background);
         this->update();
         this->draw();
@@ -57,13 +57,14 @@ void Scene::startGameLoop() {
         info.getWindow().display();
     }
 }
-void Scene::setBackground(sf::Texture& backgroundTexture){
+
+void Scene::setBackground(sf::Texture &backgroundTexture) {
     background.setTexture(backgroundTexture, false);
-    background.setScale(info.screenW / (float) backgroundTexture.getSize().x,
-                        info.screenH / (float) backgroundTexture.getSize().y);
-    backgroundLoaded=true;
+    background.setScale(info.screenW / static_cast<float>(backgroundTexture.getSize().x),
+                        info.screenH / static_cast<float>(backgroundTexture.getSize().y));
+    backgroundLoaded = true;
 }
 
-const GlobalInfo& Scene::getInfo() const {
+const GlobalInfo &Scene::getInfo() const {
     return info;
 }
