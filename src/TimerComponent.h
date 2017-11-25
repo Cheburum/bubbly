@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 19.07.17.
-//
-
 #ifndef BUBBLY_CLOCKCOMPONENT_H
 #define BUBBLY_CLOCKCOMPONENT_H
 

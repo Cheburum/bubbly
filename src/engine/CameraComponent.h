@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 25.10.17.
-//
-
 #ifndef BUBBLY_CAMERACOMPONENT_H
 #define BUBBLY_CAMERACOMPONENT_H
 
@@ -15,7 +11,7 @@ private:
     bool isMain;
     sf::View sfmlView;
 public:
-    CameraComponent(GameObject& gameObject);
+    explicit CameraComponent(GameObject &gameObject);
     void update();
     void setMain(bool);
 };

@@ -1,13 +1,9 @@
-//
-// Created by cheburum on 23.07.17.
-//
-
+#include <random>
 #include "BubbleComponent.h"
-#include "engine/helpFunctions.h"
-
+#include "engine/GlobalInfo.h"
 BubbleComponent::BubbleComponent(GameObject &obj, CounterComponent &counter) :
         Component(obj),
-        physComponent((PhysComponent *) obj.getComponent("Physics")),
+        physComponent(obj.getComponent<PhysComponent>("Physics")),
         counter(counter) {
     ++counter;
     clock.restart();
@@ -15,10 +11,14 @@ BubbleComponent::BubbleComponent(GameObject &obj, CounterComponent &counter) :
 
 void BubbleComponent::update() {
     if (clock.getElapsedTime().asSeconds() > 1.0f) {
-        physComponent->addImpulse(sf::Vector2f(randomFloat(-0.5f, 0.5f), randomFloat(-0.5f, 0.5f)));
+        physComponent.lock()->addImpulse(
+                sf::Vector2f(
+                        std::uniform_real_distribution<float>(-0.5f, 0.5f)(gameObject.getWorldInfo().random_generator),
+                        std::uniform_real_distribution<float>(-0.5f, 0.5f)(
+                                gameObject.getWorldInfo().random_generator)));
         clock.restart();
     }
-    for (auto &el: physComponent->getCollisions())
+    for (auto &el: physComponent.lock()->getCollisions())
         if (el->getGameObject().containsComponent("Bullet")) {
             --counter;
             gameObject.destroy();

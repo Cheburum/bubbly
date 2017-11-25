@@ -1,3 +1,6 @@
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #include "engine/Scene.h"
 #include "engine/SpriteComponent.h"
 #include "engine/PhysComponent.h"
@@ -9,9 +12,9 @@
 #include <sstream>
 
 struct GameConfig {
-    unsigned int countTarget;
-    unsigned int speed;
-    unsigned int time;
+    unsigned long countTarget;
+    unsigned long speed;
+    unsigned long time;
 };
 
 
@@ -25,12 +28,11 @@ private:
 
     void addBubble(const sf::Vector2f &arg, CounterComponent &counter) {
         auto &newGameObject = scene.createGameObject();
-        newGameObject.addComponent("Sprite",
-                                   new SpriteComponent(newGameObject, bubbleTexture));
+        newGameObject.addComponent("Sprite", new SpriteComponent(newGameObject, bubbleTexture));
         newGameObject.addComponent("Physics",
                                    new PhysComponent(newGameObject, 1.0f, false, true));
-        const auto currentPhysComponent = (PhysComponent *) newGameObject.getComponent("Physics");
-        currentPhysComponent->setCollider(Collider::circleCollider(0.5f));
+        const auto currentPhysComponent = newGameObject.getComponent<PhysComponent>("Physics");
+        currentPhysComponent.lock()->setCollider(Collider::circleCollider(0.5f));
         newGameObject.getTransform().position = arg;
         newGameObject.addComponent("Bubble", new BubbleComponent(newGameObject, counter));
     }
@@ -39,8 +41,8 @@ private:
         auto &newGameObject = scene.createGameObject();
         newGameObject.addComponent("Physics",
                                    new PhysComponent(newGameObject, 0.0f, false, false));
-        const auto currentPhysComponent = (PhysComponent *) newGameObject.getComponent("Physics");
-        currentPhysComponent->setCollider(Collider::rectangleCollider(size));
+        const auto currentPhysComponent = newGameObject.getComponent<PhysComponent>("Physics");
+        currentPhysComponent.lock()->setCollider(Collider::rectangleCollider(size));
         newGameObject.getTransform().position = position;
     }
 

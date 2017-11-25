@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 20.07.17.
-//
-
 #ifndef BUBBLY_BULLETCOMPONENT_H
 #define BUBBLY_BULLETCOMPONENT_H
 
@@ -14,10 +10,10 @@ class BulletComponent : public Component {
 private:
     sf::Clock clock;
     unsigned short collisionCounter;
-    SpriteComponent *sprite;
-    PhysComponent *physComponent;
+    std::weak_ptr<SpriteComponent> sprite;
+    std::weak_ptr<PhysComponent> physComponent;
 public:
-    BulletComponent(GameObject &);
+    explicit BulletComponent(GameObject &);
 
     void update();
 };

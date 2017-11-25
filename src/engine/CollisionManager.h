@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 15.07.17.
-//
-
 #ifndef BUBBLYENGINE_COLLISIONMANAGER_H
 #define BUBBLYENGINE_COLLISIONMANAGER_H
 

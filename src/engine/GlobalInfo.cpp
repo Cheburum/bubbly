@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 13.07.17.
-//
-
 #include "GlobalInfo.h"
 
 GlobalInfo::GlobalInfo(Scene &scene1)

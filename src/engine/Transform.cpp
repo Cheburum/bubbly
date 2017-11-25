@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 13.07.17.
-//
-
 #include "Transform.h"
 
 Transform::Transform()

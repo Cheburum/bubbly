@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 19.07.17.
-//
-
 #include <iostream>
 #include <cmath>
 #include <SFML/Window/Event.hpp>

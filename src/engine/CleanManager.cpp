@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 20.07.17.
-//
-
 #include "CleanManager.h"
 
 CleanManager::CleanManager(std::forward_list<GameObject> &arg) : gameObjects(arg) {

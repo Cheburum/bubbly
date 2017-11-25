@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 20.07.17.
-//
-
 #ifndef BUBBLYENGINE_CLEANMANAGER_H
 #define BUBBLYENGINE_CLEANMANAGER_H
 

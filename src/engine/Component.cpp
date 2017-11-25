@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 13.07.17.
-//
-
 #include "Component.h"
 #include "GameObject.h"
 
@@ -17,4 +13,4 @@ GameObject &Component::getGameObject() {
     return gameObject;
 }
 
-Component::~Component() {}
+Component::~Component() = default;

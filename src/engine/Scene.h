@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 12.07.17.
-//
-
 #ifndef BUBBLYENGINE_SCENE_H
 #define BUBBLYENGINE_SCENE_H
 
@@ -31,7 +27,7 @@ private:
     std::function<void()> loadLevel;
     CameraComponent* mainCamera;
 public:
-    Scene(std::function<void()>);
+    explicit Scene(std::function<void()>);
 
     void setBackground(sf::Texture &);
 

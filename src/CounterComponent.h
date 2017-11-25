@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 24.07.17.
-//
-
 #ifndef BUBBLY_BUBBLECOUNTERCOMPONENT_H
 #define BUBBLY_BUBBLECOUNTERCOMPONENT_H
 
@@ -13,7 +9,7 @@ private:
     unsigned int count;
     unsigned int maxCount;
 public:
-    CounterComponent(GameObject &);
+    explicit CounterComponent(GameObject &);
 
     void operator++();
 

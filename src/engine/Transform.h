@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 13.07.17.
-//
-
 #ifndef BUBBLYENGINE_TRANSFORM_H
 #define BUBBLYENGINE_TRANSFORM_H
 

@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 15.07.17.
-//
-
 #include <cmath>
 #include "CollisionManager.h"
 #include "PhysComponent.h"
@@ -12,7 +8,7 @@ int sgn(T val) {
 }
 
 void CollisionManager::add(Component *const x) {
-    objects.push_back((PhysComponent *) x);
+    objects.push_back(dynamic_cast<PhysComponent *>(x));
 }
 
 sf::Vector2f abs(sf::Vector2f arg) {
@@ -74,5 +70,5 @@ void CollisionManager::update() {
 }
 
 void CollisionManager::remove(Component *x) {
-    objects.erase(std::find(objects.begin(), objects.end(), (PhysComponent *) x));
+    objects.erase(std::find(objects.begin(), objects.end(), dynamic_cast<PhysComponent *>(x)));
 }

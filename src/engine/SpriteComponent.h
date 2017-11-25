@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 13.07.17.
-//
-
 #ifndef BUBBLYENGINE_SPRITECOMPONENT_H
 #define BUBBLYENGINE_SPRITECOMPONENT_H
 
@@ -17,7 +13,7 @@ private:
     sf::Vector2f textureSize;
     sf::Vector2f getScaleToUnits(sf::Vector2f units) const;
 public:
-    SpriteComponent(GameObject &gameObject1);
+    explicit SpriteComponent(GameObject &gameObject1);
 
     SpriteComponent(GameObject &transform, const sf::Texture &texture);
 

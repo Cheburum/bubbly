@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 20.07.17.
-//
-
 #ifndef BUBBLYENGINE_ABSTRACTMANAGER_H
 #define BUBBLYENGINE_ABSTRACTMANAGER_H
 

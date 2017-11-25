@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 12.07.17.
-//
-
 #ifndef BUBBLYENGINE_PHYSCOMPONENT_H
 #define BUBBLYENGINE_PHYSCOMPONENT_H
 
@@ -35,7 +31,7 @@ private:
 public:
     //too many arguments, need to create more constructors?
     PhysComponent(GameObject &gameObject1,
-                  const float mass, bool affectGravity, bool dynamic);
+                  float mass, bool affectGravity, bool dynamic);
 
     void setCollider(const Collider &col);
 

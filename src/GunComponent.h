@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 19.07.17.
-//
-
 #ifndef SHOOTINGGALLERY_GUNCOMPONENT_H
 #define SHOOTINGGALLERY_GUNCOMPONENT_H
 

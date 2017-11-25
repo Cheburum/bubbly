@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 23.07.17.
-//
-
 #ifndef BUBBLY_BUBBLECOMPONENT_H
 #define BUBBLY_BUBBLECOMPONENT_H
 
@@ -11,7 +7,7 @@
 
 class BubbleComponent : public Component {
 private:
-    PhysComponent *physComponent;
+    std::weak_ptr<PhysComponent> physComponent;
     CounterComponent &counter;
     sf::Clock clock;
 public:

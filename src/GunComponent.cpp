@@ -1,19 +1,17 @@
-//
-// Created by cheburum on 19.07.17.
-//
-
 #include <SFML/Window/Mouse.hpp>
+#include <random>
 #include "GunComponent.h"
 #include "engine/SpriteComponent.h"
 #include "engine/PhysComponent.h"
 #include "engine/GlobalInfo.h"
 #include "BulletComponent.h"
 #include "engine/Scene.h"
-#include "engine/helpFunctions.h"
+
 GunComponent::GunComponent(GameObject &object, float ypos,
                            const sf::Texture &bulletTexture1)
         : Component(object),
           bulletTexture(bulletTexture1),
+          force(1.0f),
           coolDown(1.0f) {
     gameObject.getTransform().position.y = ypos;
     clock.restart();
@@ -47,7 +45,8 @@ void GunComponent::update() {
         const auto physComp = new PhysComponent(newBullet, 1.0f, true, true);
         newBullet.addComponent("Physics", physComp);
         physComp->setCollider(Collider::circleCollider(0.5f));
-        physComp->addImpulse(sf::Vector2f(randomFloat(-5,5), -1.0f * force));
+        physComp->addImpulse(sf::Vector2f(std::uniform_real_distribution<float>(-5, 5)
+                                                  (gameObject.getWorldInfo().random_generator), -1.0f * force));
         newBullet.addComponent("Sprite", new SpriteComponent(newBullet, bulletTexture));
         newBullet.addComponent("Bullet", new BulletComponent(newBullet));
     }

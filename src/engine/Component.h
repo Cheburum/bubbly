@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 13.07.17.
-//
-
 #ifndef BUBBLYENGINE_COMPONENT_H
 #define BUBBLYENGINE_COMPONENT_H
 

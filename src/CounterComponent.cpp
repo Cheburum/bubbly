@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 24.07.17.
-//
-
 #include "CounterComponent.h"
 
 

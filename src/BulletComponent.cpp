@@ -1,22 +1,18 @@
-//
-// Created by cheburum on 20.07.17.
-//
-
 #include "BulletComponent.h"
 
 BulletComponent::BulletComponent(GameObject& object)
-        :Component(object),
-         sprite((SpriteComponent*)object.getComponent("Sprite")),
-         physComponent((PhysComponent*)gameObject.getComponent("Physics")),
-         collisionCounter(0){
+        : Component(object),
+          sprite(object.getComponent<SpriteComponent>("Sprite")),
+          physComponent(gameObject.getComponent<PhysComponent>("Physics")),
+          collisionCounter(0) {
     clock.restart();
 }
 
 void BulletComponent::update() {
-    if(const auto collCount = physComponent->getCollisions().size();
+    if (const auto collCount = physComponent.lock()->getCollisions().size();
         collCount>0){
         collisionCounter+=collCount;
-        auto& sfSprite = sprite->getSprite();
+        auto &sfSprite = sprite.lock()->getSprite();
         sfSprite.setColor(sfSprite.getColor()-sf::Color(30*collCount,30*collCount,30*collCount,0));
     }
     if(collisionCounter>4||clock.getElapsedTime().asSeconds()>10.0f)

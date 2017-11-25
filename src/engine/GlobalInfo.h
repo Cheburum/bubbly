@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 13.07.17.
-//
-
 #ifndef BUBBLYENGINE_GLOBALINFO_H
 #define BUBBLYENGINE_GLOBALINFO_H
 
@@ -12,6 +8,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include "CleanManager.h"
 #include "CollisionManager.h"
+#include <random>
 
 class Scene;
 
@@ -25,7 +22,7 @@ private:
     sf::Font font;
     Scene &scene;
 public:
-    GlobalInfo(Scene &);
+    explicit GlobalInfo(Scene &);
 
     void onFrameDone();
 
@@ -47,6 +44,7 @@ public:
     static constexpr int screenH = (720); //height
     static constexpr float screenWidthInUnits = 20;
     static constexpr float screenHeightInUnits = screenH / (screenW / screenWidthInUnits);
+    std::default_random_engine random_generator;
 };
 
 

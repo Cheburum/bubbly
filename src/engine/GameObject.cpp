@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 12.07.17.
-//
-
 #include "GameObject.h"
 #include "Component.h"
 #include "GlobalInfo.h"
@@ -16,8 +12,12 @@ void GameObject::update() {
     }
 }
 
-void GameObject::addComponent(const std::string &name, Component *comp) {
+void GameObject::addComponent(const std::string &name, std::shared_ptr<Component> comp) {
     components[name] = comp;
+}
+
+void GameObject::addComponent(const std::string &name, Component *raw) {
+    components[name] = std::shared_ptr < Component > (raw);
 }
 
 Transform &GameObject::getTransform() {
@@ -40,7 +40,7 @@ GameObject::GameObject(const GameObject &&other)
         : transform(other.transform),
           destroyed(other.destroyed),
           info(other.info) {
-    this->components = components;
+    this->components = other.components;
 }
 
 GameObject &GameObject::operator=(const GameObject &other) {
@@ -54,22 +54,6 @@ GameObject &GameObject::operator=(const GameObject &&other) {
     transform = other.transform;
     this->components = other.components;
     return *this;
-}
-
-Component *GameObject::getComponent(const std::string &name) {
-    return components[name];
-}
-
-GameObject::~GameObject() {
-    for (auto &el : components)
-        delete el.second;
-}
-
-bool GameObject::containsComponent(Component *c) const {
-    for (auto &el: components)
-        if (el.second == c)
-            return true;
-    return false;
 }
 
 bool GameObject::containsComponent(const std::string &str) const {

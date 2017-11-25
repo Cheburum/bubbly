@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 12.07.17.
-//
-
 #include <SFML/Window/Event.hpp>
 #include <fstream>
 #include <sstream>
@@ -12,6 +8,7 @@
 Scene::Scene(std::function<void()> fun) : cleaner(gameObjects),
                                           needReload(true),
                                           info(*this),
+                                          backgroundLoaded(false),
                                           loadLevel(fun),
                                           mainCamera(nullptr){}
 
@@ -37,7 +34,7 @@ GameObject &Scene::createGameObject() {
 
 void Scene::startGameLoop() {
     while (info.getWindow().isOpen()) {
-        sf::Event event;
+        sf::Event event{};
         while (info.getWindow().pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 info.getWindow().close();

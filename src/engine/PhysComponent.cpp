@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 12.07.17.
-//
-
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "PhysComponent.h"
 #include "CollisionManager.h"
@@ -14,6 +10,7 @@ PhysComponent::PhysComponent(GameObject &gameObject1, const float mass,
           speed(0.0f, 0.0f),
           acceleration(0.0f, 0.0f),
           affectGravity(affectGravity),
+          collider(Collider::circleCollider(1.0f)),
           isDynamic(dynamic) {
     gameObject.getWorldInfo().getCollisionDetector().add(this);
 };
@@ -24,7 +21,8 @@ PhysComponent::PhysComponent(PhysComponent *other) :
         affectGravity(other->affectGravity),
         mass(other->mass),
         speed(other->speed),
-        isDynamic(other->isDynamic) {
+        isDynamic(other->isDynamic),
+        collider(other->collider) {
 };
 
 

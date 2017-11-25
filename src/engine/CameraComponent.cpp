@@ -1,11 +1,9 @@
-//
-// Created by cheburum on 25.10.17.
-//
-
 #include "CameraComponent.h"
 #include "GlobalInfo.h"
 
-CameraComponent::CameraComponent(GameObject &gameObject) : Component(gameObject) {
+CameraComponent::CameraComponent(GameObject &gameObject) :
+        Component(gameObject),
+        isMain(false) {
     sfmlView.reset(sf::FloatRect(0, 0,
                                  gameObject.getWorldInfo().screenW,
                                  gameObject.getWorldInfo().screenH));

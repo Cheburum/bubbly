@@ -1,7 +1,3 @@
-//
-// Created by cheburum on 14.07.17.
-//
-
 #ifndef BUBBLYENGINE_COLLIDER_H
 #define BUBBLYENGINE_COLLIDER_H
 
