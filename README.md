@@ -12,7 +12,7 @@ It is a simple 2d game demo with physics written in C++ using Unity3d-like gameo
 ```
 3. We can get component from GO by name.
 ```C++
-  const auto currentPhysComponent = (PhysComponent*) newGameObject.getComponent("Physics");
+  const auto currentPhysComponent = newGameObject.getComponent<PhysComponent>("Physics")
 ```
 4. Set the collider of physComponent.
 ```C++
