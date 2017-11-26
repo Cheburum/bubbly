@@ -1,5 +1,5 @@
 ## Sinopsis
-It is a simple 2d game demo with physics written in C++ using Unity3d-like gameobject/component system. I've tryed to make it easy to extend and to upgrade.
+It is a simple 2d game demo with physics written in C++ using Unity3d-like gameobject/component system. I've tried to make it easy to extend and to upgrade
 ## Code example
 
 1. Add new empty GameObject to game world.
