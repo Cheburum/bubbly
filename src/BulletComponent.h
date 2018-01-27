@@ -5,10 +5,13 @@
 #include "engine/CleanManager.h"
 #include "engine/PhysComponent.h"
 #include "engine/SpriteComponent.h"
+#include "engine/Clock.h"
+
+using namespace Bubbly;
 
 class BulletComponent : public Component {
 private:
-    sf::Clock clock;
+    Clock clock;
     unsigned short collisionCounter;
     std::weak_ptr<SpriteComponent> sprite;
     std::weak_ptr<PhysComponent> physComponent;
@@ -19,4 +22,4 @@ public:
 };
 
 
-#endif //SHOOTINGGALLERY_BULLETCOMPONENT_H
+#endif

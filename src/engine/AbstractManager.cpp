@@ -1,7 +1,9 @@
 #include "AbstractManager.h"
 
-void AbstractManager::add(Component *) {}
+namespace Bubbly {
+    void AbstractManager::add(Component *) {}
 
-void AbstractManager::update() {};
+    void AbstractManager::update() {};
 
-void AbstractManager::remove(Component *) {}
+    void AbstractManager::remove(Component *) {}
+}

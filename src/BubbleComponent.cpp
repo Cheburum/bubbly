@@ -10,9 +10,9 @@ BubbleComponent::BubbleComponent(GameObject &obj, CounterComponent &counter) :
 }
 
 void BubbleComponent::update() {
-    if (clock.getElapsedTime().asSeconds() > 1.0f) {
+    if (clock.getElapsedTime() > 1.0f) { //TODO
         physComponent.lock()->addImpulse(
-                sf::Vector2f(
+                glm::vec2(
                         std::uniform_real_distribution<float>(-0.5f, 0.5f)(gameObject.getWorldInfo().random_generator),
                         std::uniform_real_distribution<float>(-0.5f, 0.5f)(
                                 gameObject.getWorldInfo().random_generator)));

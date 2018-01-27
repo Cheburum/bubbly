@@ -16,17 +16,17 @@ It is a simple 2d game demo with physics written in C++ using Unity3d-like gameo
 ```
 4. Set the collider of physComponent.
 ```C++
-  currentPhysComponent -> setCollider(Collider::rectangleCollider(sf::Vector2f(1.0f,3.0f));
+  currentPhysComponent -> setCollider(Collider::rectangleCollider(glm::vec2(1.0f,3.0f));
 ```
 5. Set GameObject's position.
 ```C++
-  newGameObject.getTransform().position = sf::Vector2f(3.0f,4.0f);
+  newGameObject.getTransform().position = glm::vec2(3.0f,4.0f);
 ```
 ## Installation
-You will need SFML library to compile it.
-### Ubuntu
+You will need GLFW3 and GLM  libraries to compile it.
+### Debian/Ubuntu
 ```shell
-sudo apt install libsfml-dev
+sudo apt install libglfw3-dev libglm-dev
 git clone https://github.com/Cheburum/bubbly.git
 cd ./bubbly/src
 cmake .

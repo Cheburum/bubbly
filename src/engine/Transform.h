@@ -1,17 +1,17 @@
 #ifndef BUBBLYENGINE_TRANSFORM_H
 #define BUBBLYENGINE_TRANSFORM_H
 
+#include <glm/vec2.hpp>
 
-#include <SFML/System.hpp>
+namespace Bubbly {
+    class Transform {
+    public:
+        glm::vec2 position;
+        float rotation;
+        glm::vec2 scale;
 
-class Transform {
-public:
-    sf::Vector2f position;
-    float rotation;
-    sf::Vector2f scale;
+        Transform();
+    };
+}
 
-    Transform();
-};
-
-
-#endif //SHOOTINGGALLERY_TRANSFORM_H
+#endif

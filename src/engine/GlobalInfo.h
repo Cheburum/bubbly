@@ -1,51 +1,49 @@
 #ifndef BUBBLYENGINE_GLOBALINFO_H
 #define BUBBLYENGINE_GLOBALINFO_H
 
-
-#include <SFML/System/Clock.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Font.hpp>
 #include "CleanManager.h"
 #include "CollisionManager.h"
+#include "Window.h"
 #include <random>
+#include "Clock.h"
 
-class Scene;
+namespace Bubbly {
+    class Scene;
 
-class GlobalInfo {
-private:
-    sf::Clock clock;
-    float pixelsPerUnit;
-    sf::Vector2f gravity;
-    sf::RenderWindow window;
-    CollisionManager collisionDetector;
-    sf::Font font;
-    Scene &scene;
-public:
-    explicit GlobalInfo(Scene &);
+    class GlobalInfo {
+    private:
+        Clock clock;
+        float pixelsPerUnit;
+        glm::vec2 gravity;
+        Window window;
+        CollisionManager collisionDetector;
+        //TODO sf::Font font;
+        Scene &scene;
+    public:
+        explicit GlobalInfo(Scene &);
 
-    void onFrameDone();
+        void onFrameDone();
 
-    int getDeltaTime() const;
+        double getDeltaTime() const;
 
-    float getPixelsPerUnit() const;
+        float getPixelsPerUnit() const;
 
-    const sf::Vector2f &getGravity() const;
+        const glm::vec2 &getGravity() const;
 
-    sf::RenderWindow &getWindow();
+        Window &getWindow();
 
-    CollisionManager &getCollisionDetector();
+        CollisionManager &getCollisionDetector();
 
-    const sf::Font &getFont();
+        //TODO const sf::Font &getFont();
 
-    Scene &getScene();
+        Scene &getScene();
 
-    static constexpr int screenW = (1280); //width
-    static constexpr int screenH = (720); //height
-    static constexpr float screenWidthInUnits = 20;
-    static constexpr float screenHeightInUnits = screenH / (screenW / screenWidthInUnits);
-    std::default_random_engine random_generator;
-};
+        static constexpr int screenW = (1280); //width
+        static constexpr int screenH = (720); //height
+        static constexpr float screenWidthInUnits = 20;
+        static constexpr float screenHeightInUnits = screenH / (screenW / screenWidthInUnits);
+        std::default_random_engine random_generator;
+    };
 
-
-#endif //SHOOTINGGALLERY_GLOBALINFO_H
+}
+#endif

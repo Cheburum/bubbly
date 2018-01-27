@@ -4,12 +4,15 @@
 #include "engine/Component.h"
 #include "engine/PhysComponent.h"
 #include "CounterComponent.h"
+#include "engine/Clock.h"
+
+using namespace Bubbly;
 
 class BubbleComponent : public Component {
 private:
     std::weak_ptr<PhysComponent> physComponent;
     CounterComponent &counter;
-    sf::Clock clock;
+    Clock clock;
 public:
     BubbleComponent(GameObject &, CounterComponent &counter);
 
@@ -17,4 +20,4 @@ public:
 };
 
 
-#endif //SHOOTINGGALLERY_BUBBLECOMPONENT_H
+#endif

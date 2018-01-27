@@ -12,9 +12,9 @@ void BulletComponent::update() {
     if (const auto collCount = physComponent.lock()->getCollisions().size();
         collCount>0){
         collisionCounter+=collCount;
-        auto &sfSprite = sprite.lock()->getSprite();
-        sfSprite.setColor(sfSprite.getColor()-sf::Color(30*collCount,30*collCount,30*collCount,0));
+        //auto &sfSprite = sprite.lock()->getSprite();
+        //sfSprite.setColor(sfSprite.getColor()-sf::Color(30*collCount,30*collCount,30*collCount,0));
     }
-    if(collisionCounter>4||clock.getElapsedTime().asSeconds()>10.0f)
+    if (collisionCounter > 4 || clock.getElapsedTime() > 10.0f)
         gameObject.destroy();
 }

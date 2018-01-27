@@ -2,30 +2,31 @@
 #define BUBBLYENGINE_COLLIDER_H
 
 #include <vector>
-#include <SFML/System.hpp>
+#include <glm/vec2.hpp>
 #include <variant>
 
-enum ColliderType {
-    CIRCLE,
-    RECTANGLE
-};
+namespace Bubbly {
+    enum ColliderType {
+        CIRCLE,
+        RECTANGLE
+    };
 
 //Abstract collider
-class Collider {
-private:
-    ColliderType type;
-    std::variant<float, sf::Vector2f> properties;
-public:
-    ColliderType getType();
+    class Collider {
+    private:
+        ColliderType type;
+        std::variant<float, glm::vec2> properties;
+    public:
+        ColliderType getType();
 
-    float getRadius();
+        float getRadius();
 
-    sf::Vector2f getSize();
+        glm::vec2 getSize();
 
-    static Collider circleCollider(float radius);
+        static Collider circleCollider(float radius);
 
-    static Collider rectangleCollider(sf::Vector2f size);
-};
+        static Collider rectangleCollider(glm::vec2 size);
+    };
+}
 
-
-#endif //SHOOTINGGALLERY_COLLIDER_H
+#endif

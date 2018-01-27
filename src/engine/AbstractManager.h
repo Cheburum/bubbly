@@ -4,14 +4,14 @@
 
 #include "Component.h"
 
-class AbstractManager {
-public:
-    virtual void add(Component *);
+namespace Bubbly {
+    class AbstractManager {
+    public:
+        virtual void add(Component *);
 
-    virtual void update();
+        virtual void update();
 
-    virtual void remove(Component *);
-};
-
-
-#endif //SHOOTINGGALLERY_ABSTRACTMANAGER_H
+        virtual void remove(Component *);
+    };
+}
+#endif

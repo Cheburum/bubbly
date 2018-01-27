@@ -2,29 +2,26 @@
 #define BUBBLYENGINE_SPRITECOMPONENT_H
 
 
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include "Component.h"
+#include "Texture.h"
 
-class SpriteComponent : public Component {
-private:
-    sf::Sprite sprite;
-    //float pixelsPerUnit;
-    sf::Vector2f textureSize;
-    sf::Vector2f getScaleToUnits(sf::Vector2f units) const;
-public:
-    explicit SpriteComponent(GameObject &gameObject1);
+namespace Bubbly {
+    class SpriteComponent : public Component {
+    private:
+        //sf::Sprite sprite;
+        //float pixelsPerUnit;
+        glm::vec2 textureSize;
 
-    SpriteComponent(GameObject &transform, const sf::Texture &texture);
+        glm::vec2 getScaleToUnits(glm::vec2 units) const;
 
-    sf::Sprite &getSprite();
+        const Texture &texture;
+    public:
+        SpriteComponent(GameObject &transform, const Texture &texture);
 
-    void setTexture(const sf::Texture &texture);
+        void update();
 
-    void update();
+        void draw();
+    };
+}
 
-    void draw();
-};
-
-
-#endif //SHOOTINGGALLERY_SPRITECOMPONENT_H
+#endif

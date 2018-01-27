@@ -1,24 +1,24 @@
 #ifndef SHOOTINGGALLERY_GUNCOMPONENT_H
 #define SHOOTINGGALLERY_GUNCOMPONENT_H
 
-
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Text.hpp>
 #include "engine/Component.h"
 #include "engine/GameObject.h"
 #include "engine/CollisionManager.h"
+#include "engine/Clock.h"
+#include "engine/Texture.h"
+
+using namespace Bubbly;
 
 class GunComponent : public Component {
 private:
-    const sf::Texture &bulletTexture;
-    sf::Clock clock;
+    const Texture &bulletTexture;
+    Clock clock;
     float force;
-    sf::Text text;
+    //TODO sf::Text text;
     float coolDown;
 public:
     GunComponent(GameObject &object, float ypos,
-                 const sf::Texture &texture);
+                 const Texture &texture);
 
     void update();
 
@@ -28,4 +28,4 @@ public:
 };
 
 
-#endif //SHOOTINGGALLERY_GUNCOMPONENT_H
+#endif

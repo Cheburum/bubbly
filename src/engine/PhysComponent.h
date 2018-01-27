@@ -1,53 +1,50 @@
 #ifndef BUBBLYENGINE_PHYSCOMPONENT_H
 #define BUBBLYENGINE_PHYSCOMPONENT_H
 
-
-#include <SFML/System.hpp>
 #include <memory>
 #include "GameObject.h"
 #include "Component.h"
 #include "Collider.h"
 
-class CollisionManager;
+namespace Bubbly {
+    class CollisionManager;
 
-class PhysComponent;
+    class PhysComponent;
 
-typedef std::vector<PhysComponent *> CollisionList;
+    typedef std::vector<PhysComponent *> CollisionList;
 
-class PhysComponent : public Component {
-private:
-    friend class CollisionManager;
+    class PhysComponent : public Component {
+    private:
+        friend class CollisionManager;
 
-    float mass;
-    sf::Vector2f speed;
-    sf::Vector2f acceleration;
-    CollisionList collisions;
-    Collider collider;
-    bool affectGravity;
-    bool isDynamic;
+        float mass;
+        glm::vec2 speed;
+        glm::vec2 acceleration;
+        CollisionList collisions;
+        Collider collider;
+        bool affectGravity;
+        bool isDynamic;
 
-    explicit PhysComponent(PhysComponent *);
+        explicit PhysComponent(PhysComponent *);
 
-public:
-    //too many arguments, need to create more constructors?
-    PhysComponent(GameObject &gameObject1,
-                  float mass, bool affectGravity, bool dynamic);
+    public:
+        PhysComponent(GameObject &gameObject1,
+                      float mass, bool affectGravity, bool dynamic);
 
-    void setCollider(const Collider &col);
+        void setCollider(const Collider &col);
 
-    void update();
+        void update();
 
-    void setMass(float);
+        void setMass(float);
 
-    void addForce(const sf::Vector2f &); //Permanent force
-    void addImpulse(const sf::Vector2f &);
+        void addForce(const glm::vec2 &); //Permanent force
+        void addImpulse(const glm::vec2 &);
 
-    void setDynamic(bool);
+        void setDynamic(bool);
 
-    const CollisionList &getCollisions();
+        const CollisionList &getCollisions();
 
-    ~PhysComponent();
-};
-
-
-#endif //SHOOTINGGALLERY_PHYSOBJECT_H
+        ~PhysComponent();
+    };
+}
+#endif

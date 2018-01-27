@@ -4,22 +4,23 @@
 #include <vector>
 #include "AbstractManager.h"
 
-class PhysComponent;
+namespace Bubbly {
+    class PhysComponent;
 
 //This class detects collisions of physics objects
-class CollisionManager : public AbstractManager {
-private:
-    std::vector<PhysComponent *> objects;
+    class CollisionManager : public AbstractManager {
+    private:
+        std::vector<PhysComponent *> objects;
 
-    static bool checkCollisions(PhysComponent *, PhysComponent *);
+        static bool checkCollisions(PhysComponent *, PhysComponent *);
 
-public:
-    void add(Component *const);
+    public:
+        void add(Component *const);
 
-    void update();
+        void update();
 
-    void remove(Component *const);
-};
+        void remove(Component *const);
+    };
 
-
-#endif //SHOOTINGGALLERY_PHYSWORLD_H
+}
+#endif

@@ -1,6 +1,3 @@
-// This is an open source non-commercial project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
 #ifndef BUBBLYENGINE_GAMEOBJECT_H
 #define BUBBLYENGINE_GAMEOBJECT_H
 
@@ -10,50 +7,52 @@
 #include <memory>
 #include "Transform.h"
 
-class Component;
+namespace Bubbly {
+    class Component;
 
-class GlobalInfo;
+    class GlobalInfo;
 
-class GameObject {
-private:
-    Transform transform;
-    std::map<std::string, std::shared_ptr<Component>> components;
-    bool destroyed;
-    GlobalInfo &info;
-public:
-    explicit GameObject(GlobalInfo &gameWorld1);
+    class GameObject {
+    private:
+        Transform transform;
+        std::map <std::string, std::shared_ptr<Component>> components;
+        bool destroyed;
+        GlobalInfo &info;
+    public:
+        explicit GameObject(GlobalInfo &gameWorld1);
 
-    GameObject(const GameObject &other);
+        GameObject(const GameObject &other);
 
-    GameObject(const GameObject &&other);
+        GameObject(const GameObject &&other);
 
-    GameObject &operator=(const GameObject &other);
+        GameObject &operator=(const GameObject &other);
 
-    GameObject &operator=(const GameObject &&other);
+        GameObject &operator=(const GameObject &&other);
 
-    void update();
+        void update();
 
-    void draw();
+        void draw();
 
-    void addComponent(const std::string &, std::shared_ptr<Component> comp);
+        void addComponent(const std::string &, std::shared_ptr <Component> comp);
 
-    void addComponent(const std::string &, Component *raw);
+        void addComponent(const std::string &, Component *raw);
 
-    GlobalInfo &getWorldInfo();
+        GlobalInfo &getWorldInfo();
 
-    bool containsComponent(const std::string &) const;
+        bool containsComponent(const std::string &) const;
 
-    bool isDestroyed() const;
+        bool isDestroyed() const;
 
-    void destroy();
+        void destroy();
 
-    template<class T>
-    std::weak_ptr<T> getComponent(const std::string &name) {
-        return std::dynamic_pointer_cast<T>(components[name]);
-    }
+        template<class T>
+        std::weak_ptr <T> getComponent(const std::string &name) {
+            return std::dynamic_pointer_cast<T>(components[name]);
+        }
 
-    Transform &getTransform();
-};
+        Transform &getTransform();
+    };
+}
 
 
 #endif

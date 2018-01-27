@@ -4,6 +4,8 @@
 
 #include "engine/Component.h"
 
+using namespace Bubbly;
+
 class CounterComponent : public Component {
 private:
     unsigned int count;
@@ -21,4 +23,4 @@ public:
 };
 
 
-#endif //SHOOTINGGALLERY_BUBBLECOUNTERCOMPONENT_H
+#endif

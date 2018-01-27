@@ -1,44 +1,44 @@
 #ifndef BUBBLYENGINE_SCENE_H
 #define BUBBLYENGINE_SCENE_H
 
-
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Font.hpp>
 #include "GlobalInfo.h"
 #include "GameObject.h"
 #include "CollisionManager.h"
 #include "CleanManager.h"
 #include "CameraComponent.h"
 #include <functional>
+#include "Texture.h"
 
-class Scene {
-private:
-    GlobalInfo info;
+namespace Bubbly {
 
-    void update();
+    class Scene {
+    private:
+        GlobalInfo info;
 
-    void draw();
+        void update();
 
-    std::forward_list<GameObject> gameObjects;
-    CleanManager cleaner;
-    bool needReload;
-    sf::Sprite background;
-    bool backgroundLoaded;
-    std::function<void()> loadLevel;
-    CameraComponent* mainCamera;
-public:
-    explicit Scene(std::function<void()>);
+        void draw();
 
-    void setBackground(sf::Texture &);
+        std::forward_list <GameObject> gameObjects;
+        CleanManager cleaner;
+        bool needReload;
+        //sf::Sprite background;
+        bool backgroundLoaded;
+        std::function<void()> loadLevel;
+        CameraComponent *mainCamera;
+    public:
+        explicit Scene(std::function<void()>);
 
-    void reload();
+        void setBackground(Texture &);
 
-    void startGameLoop();
+        void reload();
 
-    GameObject &createGameObject();
+        void startGameLoop();
 
-    const GlobalInfo &getInfo() const;
-};
+        GameObject &createGameObject();
 
+        const GlobalInfo &getInfo() const;
+    };
 
-#endif //SHOOTINGGALLERY_GAMEFIELD_H
+}
+#endif

@@ -4,17 +4,19 @@
 
 #include "GameObject.h"
 #include "Component.h"
-#include <SFML/Graphics.hpp>
 
-class CameraComponent : public Component{
-private:
-    bool isMain;
-    sf::View sfmlView;
-public:
-    explicit CameraComponent(GameObject &gameObject);
-    void update();
-    void setMain(bool);
-};
+namespace Bubbly {
+    class CameraComponent : public Component {
+    private:
+        bool isMain;
+        //TODO sf::View sfmlView;
+    public:
+        explicit CameraComponent(GameObject &gameObject);
 
+        void update();
 
-#endif //BUBBLY_CAMERACOMPONENT_H
+        void setMain(bool);
+    };
+}
+
+#endif

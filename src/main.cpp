@@ -1,6 +1,3 @@
-// This is an open source non-commercial project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-
 #include "engine/Scene.h"
 #include "engine/SpriteComponent.h"
 #include "engine/PhysComponent.h"
@@ -20,13 +17,13 @@ struct GameConfig {
 
 class Game {
 private:
-    sf::Texture bubbleTexture;
-    sf::Texture backgroundTexture;
-    sf::Texture gunTexture;
-    sf::Texture bulletTexture;
+    Texture bubbleTexture;
+    Texture backgroundTexture;
+    Texture gunTexture;
+    Texture bulletTexture;
     Scene scene;
 
-    void addBubble(const sf::Vector2f &arg, CounterComponent &counter) {
+    void addBubble(const glm::vec2 &arg, CounterComponent &counter) {
         auto &newGameObject = scene.createGameObject();
         newGameObject.addComponent("Sprite", new SpriteComponent(newGameObject, bubbleTexture));
         newGameObject.addComponent("Physics",
@@ -37,7 +34,7 @@ private:
         newGameObject.addComponent("Bubble", new BubbleComponent(newGameObject, counter));
     }
 
-    void addWall(const sf::Vector2f &size, const sf::Vector2f &position) {
+    void addWall(const glm::vec2 &size, const glm::vec2 &position) {
         auto &newGameObject = scene.createGameObject();
         newGameObject.addComponent("Physics",
                                    new PhysComponent(newGameObject, 0.0f, false, false));
@@ -74,13 +71,13 @@ private:
         if (!backgroundTexture.loadFromFile("../images/bg.png")) {
 
         };
-        backgroundTexture.setSmooth(true);
+        //backgroundTexture.setSmooth(true); TODO
         scene.setBackground(backgroundTexture);
         //bubble texture
         if (!bubbleTexture.loadFromFile("../images/circle.png")) {
 
         }; //TODO handle no file errors and etc.
-        bubbleTexture.setSmooth(true);
+        // bubbleTexture.setSmooth(true);
         //adding gameobjects
         //bubble counter
         auto &bubbleObject = scene.createGameObject();
@@ -89,35 +86,35 @@ private:
 
         for (auto j = 0, k = 0; k < cfg.countTarget; ++j)
             for (auto i = 0; i < 10 && k < cfg.countTarget; ++i, ++k)
-                addBubble(sf::Vector2f(0.5f +  2*i, 0.5f +  2*j), *bubbleCounter);
+                addBubble(glm::vec2(0.5f + 2 * i, 0.5f + 2 * j), *bubbleCounter);
 
         const auto screenW = scene.getInfo().screenWidthInUnits;
         const auto screenH = scene.getInfo().screenHeightInUnits;
         //Bottom border
 
-        addWall(sf::Vector2f(screenW, 0.5f),
-                sf::Vector2f(screenW / 2,
-                             screenH - 0.25f));
+        addWall(glm::vec2(screenW, 0.5f),
+                glm::vec2(screenW / 2,
+                          screenH - 0.25f));
         //top border
-        addWall(sf::Vector2f(screenW, 0.5f),
-                sf::Vector2f(screenW / 2, - 0.75f));
+        addWall(glm::vec2(screenW, 0.5f),
+                glm::vec2(screenW / 2, -0.75f));
         //left
-        addWall(sf::Vector2f(0.5f, screenH),
-                sf::Vector2f(-0.75f, screenH / 2));
+        addWall(glm::vec2(0.5f, screenH),
+                glm::vec2(-0.75f, screenH / 2));
         //right
-        addWall(sf::Vector2f(0.5f, screenH),
-                sf::Vector2f(screenW - 0.25f, screenH / 2));
+        addWall(glm::vec2(0.5f, screenH),
+                glm::vec2(screenW - 0.25f, screenH / 2));
         if (!gunTexture.loadFromFile("../images/pinky.png")) {
 
         }
-        gunTexture.setSmooth(true);
+        //gunTexture.setSmooth(true);
         if (!bulletTexture.loadFromFile("../images/duck.png")) {
 
         }
-        gunTexture.setSmooth(true);
+        //gunTexture.setSmooth(true);
         //add timer
         auto &timerObject = scene.createGameObject();
-        timerObject.getTransform().position = sf::Vector2f(scene.getInfo().screenW - 24 * 10, 24.0f);
+        timerObject.getTransform().position = glm::vec2(scene.getInfo().screenW - 24 * 10, 24.0f);
         timerObject.addComponent("Timer", new TimerComponent(timerObject, *bubbleCounter, cfg.time));
         //add boy
         auto &boyObject = scene.createGameObject();

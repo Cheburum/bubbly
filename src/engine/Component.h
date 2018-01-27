@@ -4,24 +4,25 @@
 #include <memory>
 #include "Transform.h"
 
-class GameObject;
+namespace Bubbly {
+    class GameObject;
 
-class Component {
-protected:
-    GameObject &gameObject;
-public:
-    Component(GameObject &gameObject);
+    class Component {
+    protected:
+        GameObject &gameObject;
+    public:
+        Component(GameObject &gameObject);
 
-    GameObject &getGameObject();
+        GameObject &getGameObject();
 
-    virtual void update();
+        virtual void update();
 
-    virtual void draw();
+        virtual void draw();
 
-    virtual ~Component();
-    //virtual void fixedUpdate();
-    //virtual void onLevelStart();
-};
+        virtual ~Component();
+        //virtual void fixedUpdate();
+        //virtual void onLevelStart();
+    };
+}
 
-
-#endif //SHOOTINGGALLERY_COMPONENT_H
+#endif
