@@ -4,8 +4,8 @@
 
 namespace Bubbly {
     ShaderProgram::ShaderProgram() {
-        if (!program)
-            throw std::runtime_error("Can not create OpenGL program!");
+        linked = 0;
+        program = 0;
     }
 
     GLSLShader &ShaderProgram::getShaderByType(ShaderType type) {
@@ -31,10 +31,11 @@ namespace Bubbly {
     }
 
     bool ShaderProgram::link() {
-        if (linked) {
+        if (linked)
             glDeleteProgram(program);
-        }
         program = glCreateProgram();
+        if (!program)
+            throw std::runtime_error("Can not create OpenGL program!");
         glAttachShader(program, vertex.getShaderId());
         glAttachShader(program, fragment.getShaderId());
         glLinkProgram(program);

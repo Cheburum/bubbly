@@ -1,5 +1,5 @@
-#ifndef BUBBLY_GLSLSHADER_H
-#define BUBBLY_GLSLSHADER_H
+#ifndef BUBBLYENGINE_GLSLSHADER_H
+#define BUBBLYENGINE_GLSLSHADER_H
 
 #include <GL/glew.h>
 #include <string_view>

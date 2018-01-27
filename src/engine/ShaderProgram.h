@@ -1,5 +1,5 @@
-#ifndef BUBBLY_SHADER_H
-#define BUBBLY_SHADER_H
+#ifndef BUBBLYENGINE_SHADER_H
+#define BUBBLYENGINE_SHADER_H
 
 #include <memory>
 #include "GLSLShader.h"

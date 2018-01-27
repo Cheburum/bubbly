@@ -19,6 +19,7 @@ namespace Bubbly {
     }
 
     void Scene::draw() {
+
         for (auto &el:gameObjects)
             el.draw();
     }
@@ -33,6 +34,8 @@ namespace Bubbly {
     }
 
     void Scene::startGameLoop() {
+        testShader.loadFragmentVertex("../shaders/fragment_shader.frag", "../shaders/vertex_shader.vert");
+        testShader.link();
         while (!info.getWindow().shouldClose()) {
             if (needReload) {
                 gameObjects.clear();

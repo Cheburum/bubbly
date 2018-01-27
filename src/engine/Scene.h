@@ -8,6 +8,7 @@
 #include "CameraComponent.h"
 #include <functional>
 #include "Texture.h"
+#include "ShaderProgram.h"
 
 namespace Bubbly {
 
@@ -25,6 +26,7 @@ namespace Bubbly {
         //sf::Sprite background;
         bool backgroundLoaded;
         std::function<void()> loadLevel;
+        ShaderProgram testShader;
         CameraComponent *mainCamera;
     public:
         explicit Scene(std::function<void()>);

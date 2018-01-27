@@ -1,5 +1,5 @@
-#ifndef BUBBLY_MOUSE_H
-#define BUBBLY_MOUSE_H
+#ifndef BUBBLYENGINE_MOUSE_H
+#define BUBBLYENGINE_MOUSE_H
 namespace Bubbly {
     class Mouse {
     public:

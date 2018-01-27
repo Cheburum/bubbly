@@ -1,5 +1,5 @@
-#ifndef BUBBLY_KEYBOARD_H
-#define BUBBLY_KEYBOARD_H
+#ifndef BUBBLYENGINE_KEYBOARD_H
+#define BUBBLYENGINE_KEYBOARD_H
 
 namespace Bubbly {
     class Keyboard {
