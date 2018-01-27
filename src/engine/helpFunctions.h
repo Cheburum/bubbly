@@ -2,11 +2,26 @@
 #define BUBBLY_HELPFUNCTIONS_H
 
 #include <glm/vec2.hpp>
+#include <GL/glew.h>
+#include <functional>
+#include <iostream>
 
 namespace Bubbly {
     template<typename T>
-    glm::tvec2 <T> multiByElement(glm::tvec2 &a, glm::tvec2 <T> &b) {
+    glm::tvec2<T> multiByElement(glm::tvec2<T> &a, glm::tvec2<T> &b) {
         return glm::tvec2<T>(a.x * b.x, a.y * b.y);
+    }
+
+    void printGLerrors(GLuint object,
+                       const std::function<void(GLuint, GLenum, GLint *)> &iv,
+                       const std::function<void(GLuint, GLsizei, GLsizei *, GLchar *)> &logFunc) {
+        GLint infoLen = 0;
+        iv(object, GL_INFO_LOG_LENGTH, &infoLen);
+        if (infoLen > 1) {
+            std::vector<char> infoLog(static_cast<unsigned long>(infoLen));
+            logFunc(object, infoLen, NULL, &infoLog[0]);
+            std::cerr << "Error compiling shader:" << &infoLog[0] << std::endl;
+        }
     }
 }
 #endif
